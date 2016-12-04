@@ -10,10 +10,10 @@
         <title>Customer Query Results</title>
 
         <!-- Bootstrap Core CSS -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/login.css" rel="stylesheet">
+        <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/resources/css/login.css" rel="stylesheet">
         <!-- Custom CSS -->
-        <link href="css/logo-nav.css" rel="stylesheet">
+        <link href="/resources/css/logo-nav.css" rel="stylesheet">
         <div class="container">
             <h1 class="welcome text-center">Welcome</h1>
         </div><!-- /container -->
