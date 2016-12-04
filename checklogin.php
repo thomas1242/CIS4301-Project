@@ -44,7 +44,7 @@ if($count_one == 1) {
 }
 else if ($count_two == 1) {
 	echo "VALID MANAGER LOGIN,\nWELCOME.";
-	header("Location: http://localhost/login.php");
+	header("Location: http://localhost/managers/managers.php");
 	exit();
 }
 else {
