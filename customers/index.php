@@ -12,10 +12,10 @@
     <title>Customer Page</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="/css/logo-nav.css" rel="stylesheet">
+    <link href="/resources/css/logo-nav.css" rel="stylesheet">
 
 </head>
 
@@ -210,10 +210,10 @@
     <!-- /.container -->
 
     <!-- jQuery -->
-    <script src="/js/jquery.js"></script>
+    <script src="/resources/js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="/js/bootstrap.min.js"></script>
+    <script src="/resources/js/bootstrap.min.js"></script>
 
 </body>
 
