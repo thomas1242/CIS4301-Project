@@ -130,27 +130,46 @@
                     exit;
                 } 
             if(isset($_SESSION['sortCustomer'])) {
-                if($_SESSION['loc'] == "airport") {
-                    $stid = oci_parse($conn, "SELECT * FROM flights WHERE departure_airport= :dptair and arrival_airport= :arvair ORDER BY " . $_SESSION['sortCustomer'] . " " . $_SESSION['orderCustomer']);
+                if(isset($_SESSION['date'])) {
+                    if($_SESSION['loc'] == "airport") {
+                        $stid = oci_parse($conn, "SELECT * FROM flights WHERE departure_airport= :dptair and arrival_airport= :arvair and depature_date= :deptdate ORDER BY " . $_SESSION['sortCustomer'] . " " . $_SESSION['orderCustomer']);
+                    }
+                    else {
+                        $stid = oci_parse($conn, "SELECT * FROM flights WHERE departure_city_state= :dptair and arrival_city_state= :arvair and departure_date= :deptdate ORDER BY " . $_SESSION['sortCustomer'] . " " . $_SESSION['orderCustomer']);
+                    }
                 }
                 else {
-                    $stid = oci_parse($conn, "SELECT * FROM flights WHERE departure_city_state= :dptair and arrival_city_state= :arvair ORDER BY " . $_SESSION['sortCustomer'] . " " . $_SESSION['orderCustomer']);
+                    if($_SESSION['loc'] == "airport") {
+                        $stid = oci_parse($conn, "SELECT * FROM flights WHERE departure_airport= :dptair and arrival_airport= :arvair ORDER BY " . $_SESSION['sortCustomer'] . " " . $_SESSION['orderCustomer']);
+                    }
+                    else {
+                        $stid = oci_parse($conn, "SELECT * FROM flights WHERE departure_city_state= :dptair and arrival_city_state= :arvair ORDER BY " . $_SESSION['sortCustomer'] . " " . $_SESSION['orderCustomer']);
+                    }
                 }
             }
             else {
-                if($_SESSION['loc'] == "airport") {
-                    $stid = oci_parse($conn, "SELECT * FROM flights WHERE departure_airport= :dptair and arrival_airport= :arvair");
+                if(isset($_SESSION['date'])) {
+                    if($_SESSION['loc'] == "airport") {
+                        $stid = oci_parse($conn, "SELECT * FROM flights WHERE departure_airport= :dptair and arrival_airport= :arvair and departure_date= :deptdate");
+                    }
+                    else {
+                        $stid = oci_parse($conn, "SELECT * FROM flights WHERE departure_city_state= :dptair and arrival_city_state= :arvair and deptdate= :deptdate");
+                    }
                 }
                 else {
-                    $stid = oci_parse($conn, "SELECT * FROM flights WHERE departure_city_state= :dptair and arrival_city_state= :arvair");
+                    if($_SESSION['loc'] == "airport") {
+                        $stid = oci_parse($conn, "SELECT * FROM flights WHERE departure_airport= :dptair and arrival_airport= :arvair");
+                    }
+                    else {
+                        $stid = oci_parse($conn, "SELECT * FROM flights WHERE departure_city_state= :dptair and arrival_city_state= :arvair");
+                    }
                 }
             }
 
             oci_bind_by_name($stid, ":dptair", $_SESSION['dept']);
             oci_bind_by_name($stid, ":arvair", $_SESSION['arv']);
-            if(isset($_SESSION['sortCustomer'])) {
-                //oci_bind_by_name($stid, ":sort", $sort);
-                //oci_bind_by_name($stid, ":order", $_SESSION['orderCustomer']);
+            if(isset($_SESSION['date']) {
+                oci_bind_by_name($stid, ":deptdate", $_SESSION['date']);
             }
             //oci_bind_by_name($stid, ":depdate", $date);
 
