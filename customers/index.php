@@ -1,22 +1,22 @@
- <?php
-    session_start();
- ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+
     <title>Customer Page</title>
+
     <!-- Bootstrap Core CSS -->
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- Custom CSS -->
     <link href="/resources/css/logo-nav.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -43,7 +43,10 @@
                         <a href="index.php">Search Flights</a>
                     </li>
                     <li>
-                        <a href="profile.php">Profile</a>
+                        <a href="#">Orders</a>
+                    </li>
+                    <li>
+                        <a href="#">Bookmarks</a>
                     </li>
                      </ul>
                         <div class="pull-right">
@@ -51,6 +54,7 @@
                                  <li><form><button formaction="http://localhost/login.php" type="submit" class="btn navbar-btn btn-danger" name="logout" id="logout" value="Log Out">Log Out</button></form></li>
                                  </ul>     
                         </div>
+               
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -58,91 +62,102 @@
     </nav>
 
     <!-- Page Content -->
-   <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1>Customer Search Queries </h1>
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1>Search for flights</h1>
+            </div>
+            <div class="panel-body">
+                <form action="customers.php" method="get">
+                <div id="selections">
+                    <p>
+                        <select id = "locSelect" name = "locSelect" class="btn btn-primary btn-sm dropdown-toggle" onchange="placeholderFill()">
+                            <option value="placeholder">Search by: </option>
+                            <option value="airport">Airport</option>
+                            <option value="city">City</option>
+                        </select>
+                    </p>
+                </div>
+                <div class="form-group">
+                    <label for="dept">From:</label>
+                    <input type="text" class="form-control" id="dept" name = "dept" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="arv">To:</label>
+                    <input type="text" class="form-control" id="arv" name = "arv" placeholder="">
+                </div>
+                <label for="month">Depart by:</label>
+                <div id="monthdropdown">
+                    <p>
+                        <select id = "month" name = "month" class="btn btn-primary btn-sm dropdown-toggle" onchange="changeDays()">
+                            <option value="placeholder">Month</option>
+                            <option value="jan">January</option>
+                            <option value="feb">February</option>
+                            <option value="mar">March</option>
+                            <option value="apr">April</option>
+                            <option value="may">May</option>
+                            <option value="jun">June</option>
+                            <option value="jul">July</option>
+                            <option value="aug">August</option>
+                            <option value="sep">September</option>
+                            <option value="oct">October</option>
+                            <option value="nov">November</option>
+                            <option value="dec">December</option>
+                        </select>
+                    </p>
+                </div>
+                <div id="daydropdown">
+                    <label for="month">Arrive by:</label>
+                    <div>
+                        <p>
+                            <select id = "day" name = "day" class="btn btn-primary btn-sm dropdown-toggle">
+                                <option value="placeholder">Day</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29" id = "29">29</option>
+                                <option value="30" id = "30">30</option>
+                                <option value="31" id = "31">31</option>
+                        </p>
+                    </div>
+                </div>
+                
+                <input type = "submit" class = "btn btn-default" id = "searchbtn">
+
+
+                </form>
             </div>
         </div>
-        <form action="customers.php" method="get">
 
-        <div id="selections">
-            <p>
-                <select id = "locSelect" name = "locSelect" class="btn btn-primary dropdown-toggle" onchange="placeholderFill()">
-                    <option value="placeholder">Search by: </option>
-                    <option value="airport">Airport</option>
-                    <option value="city">City</option>
-                </select>
-            </p>
-        </div>
 
-        <div class="form-group">
-            <label for="dept">Departing From:</label>
-            <input type="text" class="form-control" id="dept" name = "dept" placeholder="">
-        </div>
-        <div class="form-group">
-            <label for="arv">Arriving To:</label>
-            <input type="text" class="form-control" id="arv" name = "arv" placeholder="">
-        </div>
-        <label for="month">On Date:</label>
-        <div id="monthdropdown">
-            <p>
-                <select id = "month" name = "month" class="btn btn-primary dropdown-toggle" onchange="changeDays()">
-                    <option value="placeholder">Month</option>
-                    <option value="jan">January</option>
-                    <option value="feb">February</option>
-                    <option value="mar">March</option>
-                    <option value="apr">April</option>
-                    <option value="may">May</option>
-                    <option value="jun">June</option>
-                    <option value="jul">July</option>
-                    <option value="aug">August</option>
-                    <option value="sep">September</option>
-                    <option value="oct">October</option>
-                    <option value="nov">November</option>
-                    <option value="dec">December</option>
-                </select>
-            </p>
-        </div>
-        <div id="daydropdown">
-            <p>
-                <select id = "day" name = "day" class="btn btn-primary dropdown-toggle">
-                    <option value="placeholder">Day</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
-                    <option value="19">19</option>
-                    <option value="20">20</option>
-                    <option value="21">21</option>
-                    <option value="22">22</option>
-                    <option value="23">23</option>
-                    <option value="24">24</option>
-                    <option value="25">25</option>
-                    <option value="26">26</option>
-                    <option value="27">27</option>
-                    <option value="28">28</option>
-                    <option value="29" id = "29">29</option>
-                    <option value="30" id = "30">30</option>
-                    <option value="31" id = "31">31</option>
-            </p>
-        </div>
-
-        <script>
+    </div>
+    <!-- /.container -->
+    <script>
             function changeDays() {
                 var x = document.getElementById("month").value;
                 if(x === "jan") {
@@ -222,13 +237,6 @@
                 }
             }
         </script>
-        <input type = "submit" class = "btn btn-default" id = "searchbtn">
-
-        </form>
-
-    </div>
-    <!-- /.container -->
-
     <!-- jQuery -->
     <script src="/resources/js/jquery.js"></script>
 
