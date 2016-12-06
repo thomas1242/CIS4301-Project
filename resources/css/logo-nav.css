@@ -28,14 +28,35 @@ body {
 
 #searchbtn {
     position: relative;
-    right: 225px;
+    right: 217px;
     top: 50px;
-    margin-top: 20px;
+	margin-top: 20px;
 }
-
 
 #daydropdown {
     position: relative;
     left: 150px;
-    bottom: 18px;
+    bottom: 78px;
 }
+
+#daydropdown label {
+    position: relative;
+    top: 15px;
+}
+
+#conditionTitle {
+    position: relative; 
+    left: 10px;
+}
+
+#submitField {
+    position: relative; 
+    left: 10px;
+    margin-bottom: 10px;
+}
+/*
+#conditionField {
+    position: relative; 
+    left: 10px;
+}
+*/
