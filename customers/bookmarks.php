@@ -76,19 +76,34 @@
         oci_bind_by_name( $stid, ":userID", $temp );
 
         oci_execute($stid);                         // execute the query 
-        oci_fetch_all($stid, $res);
-
-        // Pretty-print the results
-        echo "<table border='1'>\n";
-        foreach ($res as $col) {
-            echo "<tr>\n";
-            foreach ($col as $item) {
-                echo "    <td>".($item !== null ? htmlentities($item, ENT_QUOTES) : "")."</td>\n";
+        
+        echo '<table class="table"><thead class="thead-inverse">
+                    <tr>
+                      <th>Flight_ID</th>
+                      <th>Distance</th>
+                      <th>Dep. Airport</th>
+                      <th>Dep. City</th>
+                      <th>Dep. State</th>
+                      <th>Dep. Date</th>
+                      <th>Arr. Airport</th>
+                      <th>Arr. City</th>
+                      <th>Arr. State</th>
+                      <th>Seats left</th>
+                      <th>Price</th>
+                    </tr>
+                  </thead><tbody>';
+            
+            //foreach ($res as $col) {
+            while ($res = oci_fetch_array($stid, OCI_ASSOC)) {
+                echo '<tr>';
+                foreach ($res as $item) {
+                    echo "    <td>".($item !== null ? htmlentities($item, ENT_QUOTES) : "")."</td>\n";
+                }
+                echo "</tr>";
             }
-            echo "</tr>\n";
-        }
-        echo "</table>\n";
-
+            echo "</tbody></table>\n";
+        // Close the Oracle connection
+                    oci_close($conn);
     ?>
 
     <!-- jQuery -->

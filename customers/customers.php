@@ -1,8 +1,5 @@
  <?php
-
  session_start();
-
-
  ?>
 
 
@@ -54,7 +51,7 @@
                              </ul>
                                 <div class="pull-right">
                                     <ul class="nav navbar-nav">
-                                         <li><form><button formaction="http://localhost/login.php" type="submit" class="btn navbar-btn btn-danger" name="logout" id="logout" value="Log Out">Log Out</button></form></li>
+                                         <li><form><button formaction="login.php" type="submit" class="btn navbar-btn btn-danger" name="logout" id="logout" value="Log Out">Log Out</button></form></li>
                                          </ul>     
                                 </div>
                     </div>
@@ -126,7 +123,6 @@
             if($month != "" && $day != "") {
                 $_SESSION['date'] = $day . "-" . $month . "-16";
             }
-            echo $_SESSION['sortCustomer'];
             $conn = oci_connect("cdurr", "cordyceps", "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=oracle.cise.ufl.edu)(PORT=1521))(CONNECT_DATA=(SID=orcl)))");
                 if (!$conn) {
                     $m = oci_error();
@@ -162,21 +158,35 @@
           //  oci_fetch_all($stid, $res);
 
 
-            $count = 0;
-            echo "<table border='1'>\n";
+           
+
+            echo '<table class="table"><thead class="thead-inverse">
+                    <tr>
+                      <th>Flight_ID</th>
+                      <th>Distance</th>
+                      <th>Dep. Airport</th>
+                      <th>Dep. City</th>
+                      <th>Dep. State</th>
+                      <th>Dep. Date</th>
+                      <th>Arr. Airport</th>
+                      <th>Arr. City</th>
+                      <th>Arr. State</th>
+                      <th>Seats left</th>
+                      <th>Price</th>
+                    </tr>
+                  </thead><tbody>';
+            
             //foreach ($res as $col) {
             while ($res = oci_fetch_array($stid, OCI_ASSOC)) {
-                echo "<tr>\n";
-                $count = 0;
+                echo '<tr>';
                 foreach ($res as $item) {
                     echo "    <td>".($item !== null ? htmlentities($item, ENT_QUOTES) : "")."</td>\n";
-                    $count++;
                 }
-                echo '<td><button formaction="http://localhost/login.php" type="submit" class="btn navbar-btn btn-info" name="logout" id="logout" value="Log Out">Order</button></td>';
-                echo '<td><button formaction="http://localhost/login.php" type="submit" class="btn navbar-btn btn-info" name="logout" id="logout" value="Bookmark">Bookmark</button></td>';
-                echo "</tr>\n";
+                echo '<form action="insertOrder.php"> <td><button type="submit" class="btn navbar-btn btn-info" name="logout" id="logout">Order</button></td></form>';
+                echo '<form action="insertBookmark.php"> <td><button type="submit" class="btn navbar-btn btn-info" name="logout" id="logout">Bookmark</button></td></form>';
+                echo "</tr>";
             }
-            echo "</table>\n";
+            echo "</tbody></table>\n";
 
 
             oci_free_statement($stid);

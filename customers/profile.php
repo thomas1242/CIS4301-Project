@@ -76,27 +76,36 @@
             $temp = (int)$_SESSION['user_ID'];
 
             $stid = oci_parse($conn, "SELECT * FROM customers WHERE customer_id= :userID");
+
+            //$stid = oci_parse($conn, "SELECT * FROM customers WHERE customer_id >= 1000000");
             oci_bind_by_name( $stid, ":userID", $temp );
 
             oci_execute($stid);                         // execute the query 
-            oci_fetch_all($stid, $res);
+            //oci_fetch_all($stid, $res);
 
-            // Pretty-print the results
-            echo ' <div class="row"> ';
-            echo '<div class="col-lg-12">';
-
-            echo "<table border='1'>\n";
-            foreach ($res as $col) {
-                echo "<tr>\n";
-                foreach ($col as $item) {
+            echo '<table class="table"><thead class="thead-inverse">
+                    <tr>
+                      <th>Customer_ID</th>
+                      <th>First name</th>
+                      <th>Last name</th>
+                      <th>Email address</th>   
+                     <th>Password</th>
+                      <th>Billing info</th>
+                    </tr>
+                  </thead><tbody>';
+            
+            //foreach ($res as $col) {
+            while ($res = oci_fetch_array($stid, OCI_ASSOC)) {
+                echo '<tr>';
+                foreach ($res as $item) {
                     echo "    <td>".($item !== null ? htmlentities($item, ENT_QUOTES) : "")."</td>\n";
                 }
-                echo "</tr>\n";
+                echo "</tr>";
             }
-            echo "</table>\n";
-
-            echo '</div>';
-            echo '</div>';
+            echo "</tbody></table>\n";
+            
+            // Close the Oracle connection
+                    oci_close($conn);
         ?>
 
         <!-- jQuery -->

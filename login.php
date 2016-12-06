@@ -40,6 +40,69 @@
                 </form><!-- /form -->
             </div><!-- /card-container -->
         </div><!-- /container -->
+        <?php
+            $conn = oci_connect("cdurr", "cordyceps", "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=oracle.cise.ufl.edu)(PORT=1521))(CONNECT_DATA=(SID=orcl)))");
+               
+              $cust_count = oci_parse($conn, "SELECT count(*) from customers ");   
+              $flight_count = oci_parse($conn, "SELECT count(*) from flights ");
+              $man_count = oci_parse($conn, "SELECT count(*) from managers ");
+              $order_count = oci_parse($conn, "SELECT count(*) from orders ");
+
+              oci_execute($cust_count);          // execute the query 
+              oci_execute($flight_count);    
+              oci_execute($man_count); 
+              oci_execute($order_count); 
+
+                $num_customers;
+                $num_flights;
+                $num_managers;
+                $num_orders;
+     
+                while ($row = oci_fetch_array($cust_count, OCI_NUM) )
+                {
+                        $num_customers = $row[0];
+                }
+                while ($row = oci_fetch_array($flight_count, OCI_NUM) )
+                {
+                        $num_flights   = $row[0];
+                }
+                while ($row = oci_fetch_array($man_count, OCI_NUM) )
+                {
+                        $num_managers  = $row[0];
+                }
+                while ($row = oci_fetch_array($order_count, OCI_NUM) )
+                {
+                        $num_orders    = $row[0];
+                }
+                echo     '<div class="container">
+                          <h3>Database statistics: </h3>
+                          <div class="panel panel-default">
+                          <div class="panel-body"> 
+                          # of customers in the database:  '  . $num_customers . '
+                          </div> </div> </div>';
+
+                echo     '<div class="container">
+                          <div class="panel panel-default">
+                          <div class="panel-body"> 
+                          # of flights in the database:   ' . $num_flights . '
+                          </div> </div> </div>';
+                          
+
+
+                echo     '<div class="container">
+                          <div class="panel panel-default">
+                          <div class="panel-body"> 
+                          # of managers in the database:  ' . $num_managers . '
+                          </div> </div> </div>';        
+
+                echo     '<div class="container">
+                          <div class="panel panel-default">
+                          <div class="panel-body"> 
+                          # of orders in the database:    ' . $num_orders . '
+                          </div> </div> </div>';                             
+                
+                oci_close($conn);
+        ?>
     </body>
 </html
 

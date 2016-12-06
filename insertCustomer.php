@@ -28,7 +28,9 @@
 				$highest_cust_id = oci_parse($conn, "SELECT customer_id 
 													 FROM customers 
 													 WHERE customer_id >= ( SELECT max(customer_id) 
-													 						FROM customers )");	
+													 						FROM customers )
+													  ");	
+
 				oci_execute($highest_cust_id);			// execute the query 
 	            
 	            $new_customer_id;
@@ -45,6 +47,11 @@
 
 				header("Location: http://localhost/customers/index.php");
 				exit();
+
+
+				// Close the Oracle connection
+				    oci_close($conn);
+				
 			?>
 
 		    <!-- jQuery -->
