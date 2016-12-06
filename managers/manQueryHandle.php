@@ -93,10 +93,20 @@ if ($condition_number)
 			else
 				$tableid = "customer_id";
 
-			$partSqlQuery = $partSqlQuery . "tablename" . $tablename . " as (select orders." . $search . " from orders, " . $values['table'] . " where orders." . $tableid . " = " . $values['table'] . "." . $tableid . " and " . $values['table'] . "." . $values['attribute'] . " " . $values['operand'] . " ";
+			// if the condition applies information from opposite table
+			if ($values['table'] != $_POST['searchTable'])
+			{
+				$partSqlQuery = $partSqlQuery . "tablename" . $tablename . " as (select orders." . $search . " from orders, " . $values['table'] . " where orders." . $tableid . " = " . $values['table'] . "." . $tableid . " and " . $values['table'] . "." . $values['attribute'] . " " . $values['operand'] . " ";
+			}
+
+			// dont join with the orders table
+			else
+			{
+				$partSqlQuery .= "tablename" . $tablename . " as (select " . $values['table'] . "." . $search . " from " . $values['table'] . " where " . $values['table'] . "." . $values['attribute'] . " " . $values['operand'] . " ";
+			}
 
 			// if the attribute of the condition is text it requires quotes around value
-			if ($values['attribute'] == "email" || $values['attribute'] == "first_name" || 
+			if ($values['attribute'] == "customer_email" || $values['attribute'] == "first_name" || 
 				$values['attribute'] == "last_name" || $values['attribute'] == "arrival_city_state"
 				|| $values['attribute'] == "departure_city_state" || $values['attribute'] == "arrival_airport" || $values['attribute'] == "departure_airport" || $values['attribute'] == "departure_state" || $values['attribute'] == "arrival_state"
 				|| $values['attribute'] == "departure_date")
@@ -118,7 +128,7 @@ if ($condition_number)
 	}
 
 	// join all the conditions together (select from part)
-	$partSqlQuery .= "select distinct " . $_POST['searchTable'] . ".* from " . $_POST['searchTable'] . ", ";
+	$partSqlQuery .= " select distinct " . $_POST['searchTable'] . ".* from " . $_POST['searchTable'] . ", ";
 
 	for ($i=1; $i<$condition_number+1; $i++)
 	{
@@ -139,12 +149,18 @@ if ($condition_number)
 	}
 
 	$finalSqlQuery .= $partSqlQuery;
-
-	// save this final query in the session
-	$_SESSION['finalquery'] = $finalSqlQuery;
-	$_SESSION['singular'] = $singularTable;
-	print $finalSqlQuery . "<br><br>";
 }
+
+// no conditions specified, enter simple query
+else
+{
+	$finalSqlQuery = "select * from " . $_POST['searchTable'];
+}
+
+// save this final query in the session
+$_SESSION['finalquery'] = $finalSqlQuery;
+$_SESSION['singular'] = $singularTable;
+
 }
 ?>
 
@@ -277,7 +293,7 @@ while ($r = oci_fetch_array($stid, OCI_NUM))
 	            for ($k=1; $k < count($r) - 2; $k++) {
 	                echo $r[$k]." &nbsp";
 	            }
-	            echo "<a href=http://localhost:8080/" . $_SESSION['singular'] . "info.php?" . $_SESSION['singular'] . "=" . $r[1] . "&information=true> info </a>";
+	            echo "<a href=http://localhost:8080/managers/" . $_SESSION['singular'] . "info.php?" . $_SESSION['singular'] . "=" . $r[1] . "&information=true> info </a>";
 	            echo "<br><br>";
 	            $b++;
 	        }
@@ -286,7 +302,7 @@ while ($r = oci_fetch_array($stid, OCI_NUM))
 	            for ($k=1; $k < count($r); $k++) {
 	                echo $r[$k]." &nbsp";
 	            }
-	            echo "<a href=http://localhost:8080/" . $_SESSION['singular'] . "info.php?" . $_SESSION['singular'] . "=" . $r[1] . "&information=true> info </a>";
+	            echo "<a href=http://localhost:8080/managers/" . $_SESSION['singular'] . "info.php?" . $_SESSION['singular'] . "=" . $r[1] . "&information=true> info </a>";
 	            echo "<br><br>";
 	            $b++;
 	        }

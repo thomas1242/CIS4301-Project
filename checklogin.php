@@ -43,15 +43,15 @@
 			}
 
 			if($customer_id != "") {
-				header("Location: http://localhost/customers/index.php");
+				header("Location: http://localhost:8080/customers/index.php");
 				exit();
 			}
 			else if ($manager_id != "") {
-				header("Location: http://localhost/managers/managers.php");
+				header("Location: http://localhost:8080/managers/managers.php");
 				exit();
 			}
 			else {
-				header("Location: http://localhost/login.php");
+				header("Location: http://localhost:8080/login.php");
 				exit();
 			}
 				

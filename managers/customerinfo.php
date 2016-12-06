@@ -5,6 +5,8 @@
 
 <?php
 
+session_start();
+
 $conn = oci_connect("cdurr", "cordyceps", "(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=oracle.cise.ufl.edu)(PORT=1521))(CONNECT_DATA=(SID=orcl)))");
 if (!$conn) {
     $m = oci_error();
@@ -52,15 +54,15 @@ else
 
 <!-- Form for information tab -->
 
-<div id="tabs" style="display: inline">
-<form>
+<div id="tabs" style="display:inline;">
+<form style="display:inline;">
 	<input type="hidden" name="customer" value="<?= $_GET['customer']; ?>">
 	<input type="hidden" name="information" value="true">	
 	<input type="submit" value="Information" id="infoTab">
 </form>
 
 <!-- Form for order tab, make sure to pass customer through get as well as -->
-<form>
+<form style="display:inline;">
 	<input type="hidden" name="customer" value="<?= $_GET['customer']; ?>">
 	<input type="hidden" name="orders" value="true">
 	<input type="submit" value="Orders" id="orderTab">
@@ -72,6 +74,8 @@ else
 <h1> Customer Information </h1>
 
 <p>
+	Customer Id: <?php echo $custInfo['CUSTOMER_ID']; ?>
+<br><br>
 	Customer Name: <?php echo $custInfo['FIRST_NAME'] . " " . $custInfo['LAST_NAME'];?> 
 <br><br>
 	Customer Email: <?php echo $custInfo['CUSTOMER_EMAIL'];?>
@@ -87,7 +91,7 @@ else
 		{
 			foreach($res as $key => $value)
 			{
-				echo $value . "   ";
+				echo $value . " &nbsp ";
 			}
 			echo "<br><br>";
 		}
@@ -102,7 +106,7 @@ else
 <script>
 	var searchBtn = document.getElementById('backToSearch');
 	searchBtn.addEventListener('click', function() {
-		document.location.href = 'http://localhost:8080/managers.php';
+		document.location.href = 'http://localhost:8080/managers/managers.php';
 	});
 </script>
 </body>

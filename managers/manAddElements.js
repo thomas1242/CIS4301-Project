@@ -360,10 +360,14 @@ function addCondition() {
 			var c = document.createElement("option");
 			c.setAttribute("value","last_name");
 			c.innerHTML = "last name";
+			var d = document.createElement("option");
+			d.setAttribute("value","customer_id");
+			d.innerHTML = "customer id";
 			document.getElementById("conditionAttribute_" + thisCond).appendChild(def);
 			document.getElementById("conditionAttribute_" + thisCond).appendChild(a);
 			document.getElementById("conditionAttribute_" + thisCond).appendChild(b);
 			document.getElementById("conditionAttribute_" + thisCond).appendChild(c);
+			document.getElementById("conditionAttribute_" + thisCond).appendChild(d);
 		}
 
 		else if (choice === "flights")
@@ -442,7 +446,7 @@ function addCondition() {
 		if (document.getElementById("conditionAttribute_" + thisCond).options[0].value === "")
 			document.getElementById("conditionAttribute_" + thisCond).options[0] = null;
 
-		if (choice === "email" || choice === "first_name" || choice === "last_name" ||
+		if (choice === "customer_email" || choice === "first_name" || choice === "last_name" ||
 			choice === "arrival_city_state" || choice === "departure_city_state" ||
 			choice === "arrival_airport" || choice === "departure_airport" ||
 			choice === "departure_date")
@@ -493,7 +497,7 @@ function addCondition() {
 
 		else if (choice === "flight_id" || choice === "distance" ||
 				 choice === "price" || choice === "spent" ||
-				 choice === "flight_count")
+				 choice === "flight_count" || choice === "customer_id")
 		{
 			if (!document.getElementById("conditionOperand_" + thisCond))
 			{
