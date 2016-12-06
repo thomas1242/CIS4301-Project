@@ -390,7 +390,7 @@ function addCondition() {
 			h.setAttribute("value","arrival_state");
 			h.innerHTML = "arrival state";
 			var i = document.createElement("option");
-			i.setAttribute("value","date");
+			i.setAttribute("value","departure_date");
 			i.innerHTML = "departure date";
 			document.getElementById("conditionAttribute_" + thisCond).appendChild(def);
 			document.getElementById("conditionAttribute_" + thisCond).appendChild(a);
@@ -437,27 +437,51 @@ function addCondition() {
 
 		if (choice === "email" || choice === "first_name" || choice === "last_name" ||
 			choice === "arrival_city_state" || choice === "departure_city_state" ||
-			choice === "arrival_airport" || choice === "departure_airport")
+			choice === "arrival_airport" || choice === "departure_airport" ||
+			choice === "departure_date")
 		{
 
 			removeSelectElements("conditionOperand_" + thisCond);
-			var a = document.createElement("option");
-			a.setAttribute("value","=");
-			a.innerHTML = "is ";
-			document.getElementById("conditionOperand_" + thisCond).appendChild(a);
 
-			var b = document.createElement("input");
-			b.setAttribute("type","text");
-			b.setAttribute("name","conditionValue_" + thisCond);
-			b.setAttribute("id","conditionValue_" + thisCond);
+			if (choice === "departure_date")
+			{
+				var a = document.createElement("option");
+				a.setAttribute("value","<");
+				a.innerHTML = "<";
+				var b = document.createElement("option");
+				b.setAttribute("value","=");
+				b.innerHTML = "=";
+				var c = document.createElement("option");
+				c.setAttribute("value",">");
+				c.innerHTML = ">";
+				document.getElementById("conditionOperand_" + thisCond).appendChild(a);
+				document.getElementById("conditionOperand_" + thisCond).appendChild(b);
+				document.getElementById("conditionOperand_" + thisCond).appendChild(c);
+			}
+			else
+			{
+				var a = document.createElement("option");
+				a.setAttribute("value","=");
+				a.innerHTML = "is";
+				document.getElementById("conditionOperand_" + thisCond).appendChild(a);
+			}
+			var d = document.createElement("input");
+			d.setAttribute("type","text");
+			d.setAttribute("name","conditionValue_" + thisCond);
+			d.setAttribute("id","conditionValue_" + thisCond);
 
 			// limit to 3 characters if airport code
 			if (choice === "arrival_airport" || choice === "departure_airport")
 			{
-				b.setAttribute("maxlength","3");
+				d.setAttribute("maxlength","3");
+			}
+			if (choice === "departure_date")
+			{
+				d.setAttribute("placeholder","DY-MON-YR");
+				d.setAttribute("maxlength","9");
 			}
 
-			document.getElementById("condition_" + thisCond).appendChild(b);
+			document.getElementById("condition_" + thisCond).appendChild(d);
 		}
 
 		else if (choice === "flight_id" || choice === "distance" ||
@@ -515,6 +539,7 @@ function addCondition() {
 			}
 			document.getElementById("condition_" + thisCond).appendChild(b);
 		}
+		/*
 		else if (choice === "date")
 		{
 			removeFormElement("condition_" + thisCond,"conditionOperand_" + thisCond);
@@ -579,7 +604,7 @@ function addCondition() {
 
 				document.getElementById("condition_" + thisCond).appendChild(b);
 			}
-		} 
+		} */
 	};
 }
 

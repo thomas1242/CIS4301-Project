@@ -1,3 +1,19 @@
+<?php
+
+	session_start();
+	// clear query from session so the new search does not contain old conditions and entries
+	if (isset($_SESSION['finalquery']) && isset($_SESSION['singular']))
+	{
+		unset($_SESSION['finalquery']);
+		unset($_SESSION['singular']);
+
+		if (isset($_SESSION['sortfinalquery'])) 
+		{
+			unset($_SESSION['sortfinalquery']);
+		}
+	}
+?>
+
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -37,4 +53,3 @@
 <script src="./manAddElements.js" language="Javascript" type="text/javascript"></script>
 </body>
 </html>
-
