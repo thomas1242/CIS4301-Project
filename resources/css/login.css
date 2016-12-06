@@ -1,12 +1,7 @@
 body, html {
     height: 100%;
     background-repeat: no-repeat;
-background: rgb(85,210,224); /* Old browsers */
-background: -moz-radial-gradient(center, ellipse cover,  rgba(85,210,224,1) 0%, rgba(187,214,228,1) 0%, rgba(186,211,225,1) 15%, rgba(186,211,225,1) 38%, rgba(169,199,215,1) 68%, rgba(169,199,215,1) 68%, rgba(169,199,215,1) 82%, rgba(158,191,208,1) 100%); /* FF3.6-15 */
-background: -webkit-radial-gradient(center, ellipse cover,  rgba(185,210,224,1) 0%,rgba(187,214,228,1) 0%,rgba(186,211,225,1) 15%,rgba(186,211,225,1) 38%,rgba(169,199,215,1) 68%,rgba(169,199,215,1) 68%,rgba(169,199,215,1) 82%,rgba(158,191,208,1) 100%); /* Chrome10-25,Safari5.1-6 */
-background: radial-gradient(ellipse at center,  rgba(185,210,224,1) 0%,rgba(187,214,228,1) 0%,rgba(186,211,225,1) 15%,rgba(186,211,225,1) 38%,rgba(169,199,215,1) 68%,rgba(169,199,215,1) 68%,rgba(169,199,215,1) 82%,rgba(158,191,208,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=&#039;#b9d2e0&#039;, endColorstr=&#039;#9ebfd0&#039;,GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-
+    background: #777;
 }
 
 .login_box{
@@ -28,7 +23,7 @@ hr{
 .welcome{
     font-family: &quot;myriad-pro&quot;,sans-serif;
     font-style: normal;
-    font-weight: 100;
+    font-weight: 120;
     color:#FFFFFF;
     margin-bottom:25px;
     margin-top:50px;

@@ -9,6 +9,12 @@ html {
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
+
+#inner {
+          width: 50%;
+          margin: 0 auto; 
+      }
+
 body {
   margin: 0;
 }

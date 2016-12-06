@@ -1,22 +1,22 @@
+ <?php
+    session_start();
+ ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>Customer Page</title>
-
     <!-- Bootstrap Core CSS -->
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom CSS -->
     <link href="/resources/css/logo-nav.css" rel="stylesheet">
-
 </head>
 
 <body>
@@ -43,10 +43,7 @@
                         <a href="index.php">Search Flights</a>
                     </li>
                     <li>
-                        <a href="#">Orders</a>
-                    </li>
-                    <li>
-                        <a href="#">Bookmarks</a>
+                        <a href="profile.php">Profile</a>
                     </li>
                      </ul>
                         <div class="pull-right">
@@ -54,7 +51,6 @@
                                  <li><form><button formaction="http://localhost/login.php" type="submit" class="btn navbar-btn btn-danger" name="logout" id="logout" value="Log Out">Log Out</button></form></li>
                                  </ul>     
                         </div>
-               
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -62,22 +58,33 @@
     </nav>
 
     <!-- Page Content -->
-    <div class="container">
+   <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <h1>Search for flights</h1>
+                <h1>Customer Search Queries </h1>
             </div>
         </div>
         <form action="customers.php" method="get">
-         <div class="form-group">
-            <label for="dept">From:</label>
-            <input type="text" class="form-control" id="dept" name = "dept">
+
+        <div id="selections">
+            <p>
+                <select id = "locSelect" name = "locSelect" class="btn btn-primary dropdown-toggle" onchange="placeholderFill()">
+                    <option value="placeholder">Search by: </option>
+                    <option value="airport">Airport</option>
+                    <option value="city">City</option>
+                </select>
+            </p>
+        </div>
+
+        <div class="form-group">
+            <label for="dept">Departing From:</label>
+            <input type="text" class="form-control" id="dept" name = "dept" placeholder="">
         </div>
         <div class="form-group">
-            <label for="arv">To:</label>
-            <input type="text" class="form-control" id="arv" name = "arv">
+            <label for="arv">Arriving To:</label>
+            <input type="text" class="form-control" id="arv" name = "arv" placeholder="">
         </div>
-        <label for="month">Depart by:</label>
+        <label for="month">On Date:</label>
         <div id="monthdropdown">
             <p>
                 <select id = "month" name = "month" class="btn btn-primary dropdown-toggle" onchange="changeDays()">
@@ -97,7 +104,6 @@
                 </select>
             </p>
         </div>
-        <label for="month">Arrive by:</label>
         <div id="daydropdown">
             <p>
                 <select id = "day" name = "day" class="btn btn-primary dropdown-toggle">
@@ -135,6 +141,7 @@
                     <option value="31" id = "31">31</option>
             </p>
         </div>
+
         <script>
             function changeDays() {
                 var x = document.getElementById("month").value;
@@ -199,12 +206,25 @@
                 }
 
             }
+            function placeholderFill() {
+                var selectby = document.getElementById("locSelect").value;
+                if(selectby === "airport") {
+                    document.getElementById("dept").placeholder = "Departure Airport (ie. MIA, LAX)";
+                    document.getElementById("arv").placeholder = "Enter Name of Arrival Airport (ie. MIA, LAX)";
+                }
+                else if(selectby === "city") {
+                    document.getElementById("dept").placeholder = "Departure City (ie. Miami, New York)";
+                    document.getElementById("arv").placeholder = "Enter Name of Arrival City (ie. Miami, New York)";
+                }
+                else {
+                    document.getElementById("dept").placeholder = "";
+                    document.getElementById("arv").placeholder = "";
+                }
+            }
         </script>
         <input type = "submit" class = "btn btn-default" id = "searchbtn">
 
-
         </form>
-
 
     </div>
     <!-- /.container -->
