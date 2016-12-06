@@ -269,16 +269,23 @@ function addCondition() {
 	// set all individual select condition fields to proper ids and names
 	condLabel.setAttribute("for","conditionTable_" + condCount);
 	condLabel.innerHTML = "Condition " + condCount + ":  ";
+	condLabel.setAttribute("style", "margin-left: 14px");
 
 	condTable.setAttribute("name","conditionTable_" + condCount);
 	condTable.setAttribute("id","conditionTable_" + condCount);
+	condTable.setAttribute("class", "btn btn-primary btn-sm dropdown-toggle");
+	condTable.setAttribute("style", "margin-left: 10px");
 
 	condAttribute.setAttribute("name","conditionAttribute_" + condCount);
 	condAttribute.setAttribute("id","conditionAttribute_" + condCount);
+	condAttribute.setAttribute("class", "btn btn-primary btn-sm dropdown-toggle");
+	condAttribute.setAttribute("style", "margin-left: 10px");
 	condAttribute.disabled = true;
 
 	condOperand.setAttribute("name","conditionOperand_" + condCount);
 	condOperand.setAttribute("id","conditionOperand_" + condCount);
+	condOperand.setAttribute("class", "btn btn-primary btn-sm dropdown-toggle");
+	condOperand.setAttribute("style", "margin-left: 10px");
 	condOperand.disabled = true;
 
 	// add default options to all select condition fields
