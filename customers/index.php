@@ -43,11 +43,9 @@
                         <a href="index.php">Search Flights</a>
                     </li>
                     <li>
-                        <a href="#">Orders</a>
+                        <a href="profile.php">Profile</a>
                     </li>
-                    <li>
-                        <a href="#">Bookmarks</a>
-                    </li>
+                    
                      </ul>
                         <div class="pull-right">
                             <ul class="nav navbar-nav">
